@@ -3,300 +3,159 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>p1 | المحاضرات والحساب</title>
+  <title>p1 | المحاضرات</title>
   <style>
     :root{
-      --bg:#050915;
-      --bg2:#09111f;
+      --bg:#050913;
+      --bg2:#0a1120;
       --card:rgba(11,18,34,.72);
-      --card2:rgba(8,13,24,.88);
-      --line:rgba(148,163,184,.12);
+      --line:rgba(255,255,255,.08);
       --text:#edf6ff;
-      --muted:#92a3bd;
+      --muted:#94a3bb;
       --accent:#38bdf8;
       --accent2:#8b5cf6;
       --accent3:#22c55e;
       --danger:#fb7185;
-      --warn:#f59e0b;
-      --shadow:0 24px 90px rgba(0,0,0,.46);
-      --radius:26px;
+      --shadow:0 18px 60px rgba(0,0,0,.34);
+      --r:24px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
-      min-height:100vh;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
+      margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(56,189,248,.16), transparent 25%),
-        radial-gradient(circle at 84% 15%, rgba(139,92,246,.16), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(34,197,94,.10), transparent 22%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+        radial-gradient(circle at 10% 18%, rgba(56,189,248,.12), transparent 22%),
+        radial-gradient(circle at 86% 14%, rgba(139,92,246,.12), transparent 22%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
       overflow-x:hidden;
     }
-    body::before, body::after{
-      content:"";
-      position:fixed;
-      width:460px;height:460px;border-radius:50%;
-      filter:blur(56px);opacity:.14;pointer-events:none;z-index:0;
-      animation:float 14s ease-in-out infinite;
-    }
-    body::before{left:-130px;top:50px;background:rgba(56,189,248,.52)}
-    body::after{right:-140px;bottom:-120px;background:rgba(139,92,246,.52);animation-delay:-6s}
-    @keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-18px,0) scale(1.05)}}
-    .noise{
-      position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;
-      background-image:linear-gradient(rgba(255,255,255,.8) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.8) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, black 30%, transparent 80%);
-    }
-    .page{position:relative;z-index:2;min-height:100vh;padding:18px;display:grid;place-items:center}
-    .shell{width:min(1220px,100%)}
+    .noise{position:fixed;inset:0;pointer-events:none;opacity:.03;background-image:linear-gradient(rgba(255,255,255,.8) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.8) 1px, transparent 1px);background-size:44px 44px;z-index:0}
+    .page{position:relative;z-index:1;min-height:100vh;padding:16px;display:grid;place-items:center}
+    .shell{width:min(1240px,100%)}
     .card{
-      position:relative;
-      border:1px solid rgba(255,255,255,.09);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      backdrop-filter:blur(16px) saturate(140%);
-      -webkit-backdrop-filter:blur(16px) saturate(140%);
-      box-shadow:var(--shadow);
-      border-radius:var(--radius);
-      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(12px) saturate(135%);
     }
-    .card::before{
-      content:"";position:absolute;inset:0;pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.11), transparent 35%, transparent 65%, rgba(255,255,255,.06));
-    }
-    .topbar{
-      display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-      padding:18px 18px 0;
-    }
-    .brand{display:flex;align-items:center;gap:14px}
-    .mark{
-      width:54px;height:54px;border-radius:18px;display:grid;place-items:center;flex:none;
-      font-size:22px;font-weight:900;color:#04111f;
-      background:linear-gradient(135deg, #67e8f9, #8b5cf6 56%, #22c55e);
-      box-shadow:0 0 0 6px rgba(255,255,255,.05), 0 0 32px rgba(56,189,248,.15);
-    }
-    .brand h1{margin:0;font-size:20px;line-height:1;font-weight:900;letter-spacing:.2px}
+    .topbar{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;padding:16px 16px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;flex:none;font-size:22px;font-weight:900;color:#04111f;background:linear-gradient(135deg,#67e8f9,#8b5cf6 56%,#22c55e)}
+    .brand h1{margin:0;font-size:20px;line-height:1;font-weight:900}
     .brand p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
     .brand-e{display:inline-flex;align-items:center;justify-content:center;width:.78em;height:.78em;vertical-align:middle;transform:translateY(.03em)}
     .brand-e img{display:block;width:100%;height:100%;object-fit:contain}
-    .top-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center}
+    .top-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    .pill,.btn{
+      border:none;cursor:pointer;border-radius:16px;
+      transition:transform .16s ease, filter .16s ease, background .16s ease;
+    }
     .pill{
-      border:none;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
-      color:#d8e8ff;font-size:13px;cursor:pointer
+      padding:10px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#dbeafe;font-size:13px
     }
-    .pill:hover{background:rgba(255,255,255,.08)}
-    .main{padding:18px}
-    .hero{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:stretch;
-      margin-top:2px;
-    }
-    .panel{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      overflow:hidden;
-    }
+    .pill:hover,.btn:hover{transform:translateY(-1px)}
+    .main{padding:16px}
+    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+    .panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03))}
     .hero-left{padding:18px}
-    .hero-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+    .hero-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
     .hero h2{margin:0 0 8px;font-size:26px}
     .hero p{margin:0;color:var(--muted);line-height:1.9;font-size:14px}
-    .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
     .tag{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:9px 12px;border-radius:999px;font-size:12px;
-      background:rgba(56,189,248,.11);border:1px solid rgba(56,189,248,.16);color:#d7f7ff
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-size:12px;
+      background:rgba(56,189,248,.10);border:1px solid rgba(56,189,248,.16);color:#e0fbff
     }
     .tag.green{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.16)}
     .tag.purple{background:rgba(139,92,246,.10);border-color:rgba(139,92,246,.16)}
-    .tag.red{background:rgba(251,113,133,.10);border-color:rgba(251,113,133,.16)}
-    .coin-box{
-      padding:18px;
-      display:grid;gap:14px;
-      align-content:start;
+    .coin-box{padding:18px;display:grid;gap:12px;align-content:start}
+    .coin-main{
+      padding:18px;border-radius:20px;background:linear-gradient(135deg, rgba(56,189,248,.14), rgba(139,92,246,.10), rgba(34,197,94,.10));
+      border:1px solid rgba(255,255,255,.08)
     }
-    .coin-hero{
-      padding:18px;border-radius:20px;
-      background:linear-gradient(135deg, rgba(56,189,248,.16), rgba(139,92,246,.10), rgba(34,197,94,.10));
-      border:1px solid rgba(255,255,255,.08);
+    .coin-main span{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+    .coin-main button{
+      width:100%;padding:14px 16px;border:none;border-radius:18px;cursor:pointer;color:#04111f;
+      background:linear-gradient(135deg,#67e8f9,#8b5cf6 58%,#22c55e);font-size:22px;font-weight:900
     }
-    .coin-hero span{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
-    .coin-hero button{
-      width:100%;text-align:center;
-      border:none;cursor:pointer;
-      padding:14px 16px;border-radius:18px;font-size:22px;font-weight:900;color:#04111f;
-      background:linear-gradient(135deg, #67e8f9, #8b5cf6 56%, #22c55e);
-      box-shadow:0 12px 30px rgba(56,189,248,.14);
-    }
-    .coin-hero button small{display:block;font-size:12px;font-weight:700;opacity:.9}
+    .coin-main button small{display:block;font-size:12px;font-weight:700;opacity:.9}
     .wallet-actions{display:grid;gap:10px}
     .btn{
-      width:100%;border:none;border-radius:18px;padding:14px 16px;
-      font-size:15px;font-weight:900;cursor:pointer;
-      color:#08111f;background:linear-gradient(135deg, #67e8f9, #8b5cf6 58%, #22c55e);
-      box-shadow:0 16px 36px rgba(34,197,94,.10), 0 0 24px rgba(56,189,248,.10);
-      transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      width:100%;padding:14px 16px;font-size:15px;font-weight:900;color:#08111f;
+      background:linear-gradient(135deg,#67e8f9,#8b5cf6 58%,#22c55e)
     }
-    .btn:hover{transform:translateY(-2px);filter:saturate(1.04)}
-    .btn.ghost{
-      background:rgba(255,255,255,.05);color:var(--text);border:1px solid rgba(255,255,255,.08);box-shadow:none
-    }
-    .btn.danger{background:linear-gradient(135deg, #fb7185, #f43f5e 60%, #f59e0b);color:white}
+    .btn.ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--line)}
+    .btn.secondary{background:linear-gradient(135deg,#a78bfa,#38bdf8 55%,#34d399)}
+    .btn.danger{background:linear-gradient(135deg,#fb7185,#f43f5e 60%,#f59e0b);color:white}
     .btn.small{padding:10px 12px;border-radius:14px;font-size:13px}
-    .btn.secondary{background:linear-gradient(135deg, #a78bfa, #38bdf8 55%, #34d399)}
-    .toolbar{
-      display:grid;grid-template-columns:1fr 180px 170px;gap:10px;
-      margin:16px 0 14px;
-    }
-    input, select, textarea{
+    .mini{color:var(--muted);font-size:12px;line-height:1.8}
+    .progress{height:9px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+    .progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#38bdf8,#8b5cf6,#22c55e)}
+    .section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin:16px 0 10px}
+    .section-head h3{margin:0;font-size:18px}
+    .section-head p{margin:0;color:var(--muted);font-size:13px}
+    .toolbar{display:grid;grid-template-columns:1fr 180px 170px;gap:10px;margin:0 0 14px}
+    input,select,textarea{
       width:100%;padding:14px 15px;border-radius:16px;border:1px solid rgba(255,255,255,.10);
-      background:rgba(5,10,22,.56);color:var(--text);outline:none;font-size:15px;
-      transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease, background .18s ease;
+      background:rgba(5,10,22,.56);color:var(--text);outline:none;font-size:15px
     }
-    input::placeholder, textarea::placeholder{color:#7f90ac}
-    input:focus, select:focus, textarea:focus{
-      border-color:rgba(56,189,248,.7);
-      box-shadow:0 0 0 4px rgba(56,189,248,.10);
-      background:rgba(5,10,22,.76);
-    }
-    .section-title{
-      display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;
-      margin:8px 0 10px;
-    }
-    .section-title h3{margin:0;font-size:18px}
-    .section-title p{margin:0;color:var(--muted);font-size:13px}
-    .lectures{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
-    }
+    input:focus,select:focus,textarea:focus{border-color:rgba(56,189,248,.72);box-shadow:0 0 0 4px rgba(56,189,248,.10)}
+    .lectures{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .lecture{
-      display:flex;flex-direction:column;gap:14px;
-      padding:16px;border-radius:22px;
+      display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:22px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.08);
-      min-height:100%;
+      border:1px solid var(--line)
     }
+    .thumb{width:100%;aspect-ratio:16/9;border-radius:18px;object-fit:cover;border:1px solid rgba(255,255,255,.08);background:rgba(5,10,22,.5)}
     .lecture h4{margin:0;font-size:18px}
-    .lecture .desc{color:var(--muted);line-height:1.8;font-size:13px;min-height:74px}
-    .lecture .meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
-    .price{
-      padding:8px 12px;border-radius:999px;
-      background:rgba(56,189,248,.11);border:1px solid rgba(56,189,248,.15);font-size:12px;color:#dcfbff
-    }
-    .actions{display:grid;gap:10px;margin-top:auto}
-    .muted{color:var(--muted)}
-    .empty{
-      padding:18px;border-radius:18px;text-align:center;color:var(--muted);
-      background:rgba(5,10,22,.44);border:1px solid rgba(255,255,255,.08)
-    }
-    .account-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;
-    }
-    .stats{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:12px
-    }
-    .stat{
-      padding:14px;border-radius:18px;background:rgba(5,10,22,.38);border:1px solid rgba(255,255,255,.08)
-    }
-    .stat span{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}
-    .stat b{font-size:22px}
-    .list{
-      display:grid;gap:10px;max-height:320px;overflow:auto;padding-right:2px
-    }
-    .list-item{
-      display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
-      padding:12px 13px;border-radius:16px;background:rgba(5,10,22,.44);border:1px solid rgba(255,255,255,.08)
-    }
-    .list-item small{color:var(--muted)}
-    .controls{
-      display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px
-    }
-    .progress{
-      height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid rgba(255,255,255,.06)
-    }
-    .progress > span{
-      display:block;height:100%;width:0%;
-      background:linear-gradient(90deg, #38bdf8, #8b5cf6, #22c55e);
-    }
-    .footer-note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.7}
+    .desc{color:var(--muted);line-height:1.85;font-size:13px;min-height:70px}
+    .meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+    .price{padding:8px 12px;border-radius:999px;background:rgba(56,189,248,.11);border:1px solid rgba(56,189,248,.15);font-size:12px}
+    .lecture .actions{display:grid;gap:10px;margin-top:auto}
+    .account-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .list{display:grid;gap:10px;max-height:320px;overflow:auto;padding-right:2px}
+    .item{padding:12px 13px;border-radius:16px;background:rgba(5,10,22,.44);border:1px solid var(--line)}
+    .item-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+    .empty{padding:18px;border-radius:18px;text-align:center;color:var(--muted);background:rgba(5,10,22,.42);border:1px solid var(--line)}
+    .msg{margin-top:12px;min-height:24px;font-size:14px;line-height:1.7;padding:0 4px}
+    .msg.error{color:#fda4af}.msg.ok{color:#86efac}.msg.info{color:#bae6fd}
     .hidden{display:none !important}
 
     .modal{
-      position:fixed;inset:0;z-index:40;
-      display:none;align-items:center;justify-content:center;
-      background:rgba(0,0,0,.52);
-      padding:14px;
+      position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;
+      background:rgba(0,0,0,.50);padding:14px
     }
     .modal.show{display:flex}
     .modal-card{
-      width:min(1080px,100%);
-      max-height:min(92vh,980px);
-      overflow:auto;
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(13,20,36,.98), rgba(9,15,27,.98));
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow:var(--shadow);
+      width:min(1120px,100%);max-height:min(92vh,1000px);overflow:auto;
+      border-radius:26px;background:linear-gradient(180deg, rgba(13,20,36,.98), rgba(9,15,27,.98));
+      border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow)
     }
-    .modal-head{
-      display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;
-      padding:18px 18px 12px;border-bottom:1px solid rgba(255,255,255,.08)
-    }
+    .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;padding:18px;border-bottom:1px solid rgba(255,255,255,.08)}
     .modal-head h3{margin:0;font-size:22px}
+    .close{width:38px;height:38px;border:none;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.06);color:var(--text);font-size:20px}
     .modal-body{padding:18px}
-    .close{
-      border:none;border-radius:14px;cursor:pointer;
-      width:38px;height:38px;
-      background:rgba(255,255,255,.06);color:var(--text);font-size:20px
-    }
-    .lecture-layout{
-      display:grid;grid-template-columns:1.1fr .9fr;gap:14px;
-    }
-    .video-wrap{
-      border-radius:22px;overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(5,10,22,.42);
-    }
-    .video-wrap iframe{
-      width:100%;aspect-ratio:16/9;border:0;display:block;background:black
-    }
-    .doc-box,.comment-box,.buyers-box,.settings-box{
-      border-radius:22px;padding:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(5,10,22,.34)
-    }
+    .lecture-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+    .box{border-radius:22px;padding:16px;border:1px solid var(--line);background:rgba(5,10,22,.34)}
+    .video-wrap{border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:black}
+    .video-wrap iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+    .inline-image{width:100%;max-height:280px;object-fit:cover;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(5,10,22,.5)}
+    .controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .file-list,.comment-list,.buyer-list{display:grid;gap:10px;max-height:330px;overflow:auto;padding-right:2px}
-    .file-item,.comment-item,.buyer-item{
-      padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)
-    }
-    .comment-top,.buyer-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start}
+    .file-list,.comment-list,.buyer-list{display:grid;gap:10px;max-height:320px;overflow:auto;padding-right:2px}
+    .comment-item,.buyer-item,.file-item{padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
     .comment-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .comment-actions button{padding:8px 10px;border-radius:12px;border:none;cursor:pointer;background:rgba(255,255,255,.07);color:var(--text)}
-    .comment-actions button.danger{background:rgba(251,113,133,.14);color:#ffd7de}
-    .comment-actions button.ok{background:rgba(34,197,94,.14);color:#d9ffe9}
-    .input-inline{display:grid;grid-template-columns:1fr auto;gap:10px}
-    .support-link{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:13px 14px;border-radius:16px;text-decoration:none;font-weight:900;
-      background:linear-gradient(135deg, #22c55e, #16a34a);color:white;
+    .comment-actions .danger{background:rgba(251,113,133,.14);color:#ffd7de}
+    .comment-actions .ok{background:rgba(34,197,94,.14);color:#d9ffe9}
+    .support-link,.recharge-link{
+      display:inline-flex;align-items:center;justify-content:center;padding:13px 14px;border-radius:16px;text-decoration:none;font-weight:900
     }
-    .recharge-link{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:13px 14px;border-radius:16px;text-decoration:none;font-weight:900;
-      background:linear-gradient(135deg, #67e8f9, #8b5cf6 58%, #22c55e);color:#04111f;
-    }
-    .login-box{
-      padding:18px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.08);
-    }
+    .support-link{background:linear-gradient(135deg,#22c55e,#16a34a);color:white}
+    .recharge-link{background:linear-gradient(135deg,#67e8f9,#8b5cf6 58%,#22c55e);color:#04111f}
+    .login-box{padding:18px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));border:1px solid var(--line)}
     .login-box h3{margin:0 0 8px;font-size:22px}
     .login-box p{margin:0 0 14px;color:var(--muted);line-height:1.8;font-size:14px}
-    .msg{margin-top:12px;min-height:24px;font-size:14px;line-height:1.7;padding:0 4px}
-    .msg.error{color:#fda4af}.msg.ok{color:#86efac}.msg.info{color:#bae6fd}
-    .mini{font-size:12px;color:var(--muted);line-height:1.7}
+
     @media (max-width:1080px){
       .lectures{grid-template-columns:repeat(2,1fr)}
       .hero,.account-grid,.lecture-layout{grid-template-columns:1fr}
@@ -304,16 +163,13 @@
     @media (max-width:720px){
       .page{padding:12px}
       .main{padding:14px}
-      .lectures,.toolbar,.controls,.stats{grid-template-columns:1fr}
+      .toolbar,.lectures,.controls,.grid-2{grid-template-columns:1fr}
       .topbar{padding:14px 14px 0}
-      .brand{align-items:flex-start}
-      .modal-body,.modal-head{padding:14px}
     }
   </style>
 </head>
 <body>
   <div class="noise"></div>
-
   <main class="page">
     <div class="shell">
       <div class="card">
@@ -326,8 +182,8 @@
             </div>
           </div>
           <div class="top-actions">
-            <button class="pill" id="settingsBtn" type="button">⚙️ إعدادات الحساب</button>
-            <button class="pill" id="supportBtn" type="button">💬 تواصل مع الدعم</button>
+            <button class="pill" id="settingsBtn" type="button">⚙️ الإعدادات</button>
+            <button class="pill" id="supportBtn" type="button">💬 الدعم</button>
             <button class="pill" id="logoutBtn" type="button">خروج</button>
           </div>
         </div>
@@ -335,38 +191,32 @@
         <div class="main">
           <div class="hero">
             <section class="panel hero-left">
-              <div class="hero-title">
+              <div class="hero-top">
                 <div>
                   <h2 id="helloTitle">مرحبًا بك</h2>
-                  <p id="helloSub">حمّل محاضراتك، اشترِ ما تحتاجه، واحتفظ بكل شيء داخل حسابك.</p>
+                  <p id="helloSub">كل ما تشتريه يُحفظ في حسابك، مع تعليقات ومحتوى خاص داخل المحاضرات.</p>
                 </div>
                 <div class="tag purple" id="userTag">جاري التحميل...</div>
               </div>
-              <div class="badge-row">
+              <div class="tags">
                 <span class="tag green">Firebase Auth</span>
                 <span class="tag">Firestore</span>
                 <span class="tag purple">حفظ المشتريات</span>
-                <span class="tag red">تعليقات مباشرة</span>
               </div>
-              <div style="margin-top:14px" class="progress" aria-hidden="true"><span id="loadBar"></span></div>
-              <div class="footer-note">الضغط على الكوينز يعرض زر الشحن مباشرة، وكل عملية شراء تُحفظ في حسابك وفي سجل المحاضرة.</div>
+              <div style="margin-top:14px" class="progress"><span id="loadBar"></span></div>
+              <div class="mini" style="margin-top:10px">اضغط على الرصيد لفتح الشحن مباشرة على واتساب.</div>
             </section>
 
             <aside class="panel coin-box">
-              <div class="coin-hero">
+              <div class="coin-main">
                 <span>عدد الكوينز</span>
-                <button id="coinsBtn" type="button">
-                  <span id="coinsValue">0</span>
-                  <small>اضغط هنا لفتح الشحن</small>
-                </button>
+                <button id="coinsBtn" type="button"><span id="coinsValue">0</span><small>اضغط لفتح الشحن</small></button>
               </div>
               <div class="wallet-actions">
                 <button class="btn" id="rechargeBtn" type="button">انتقال إلى الشحن</button>
-                <button class="btn ghost" id="refreshBtn" type="button">تحديث البيانات</button>
+                <button class="btn ghost" id="refreshBtn" type="button">تحديث سريع</button>
               </div>
-              <div class="mini">
-                الشحن يتم عبر واتساب على الرقم <b>01124680211</b>.
-              </div>
+              <div class="mini">الشحن يتم عبر واتساب على الرقم <b>01124680211</b>.</div>
             </aside>
           </div>
 
@@ -384,10 +234,10 @@
             </select>
           </div>
 
-          <div class="section-title">
+          <div class="section-head">
             <div>
               <h3>المحاضرات</h3>
-              <p>كل محاضرة لها سعر، وصف، فيديو خاص، وملفات HTML عند توفرها.</p>
+              <p>يظهر الاسم والصورة والوصف فقط في البطاقة.</p>
             </div>
             <div class="tag" id="lectureCount">0 محاضرة</div>
           </div>
@@ -396,19 +246,19 @@
 
           <div class="account-grid">
             <div class="panel" style="padding:16px">
-              <div class="section-title" style="margin-top:0">
+              <div class="section-head" style="margin-top:0">
                 <div>
                   <h3>محاضراتي المشتراة</h3>
-                  <p>كل ما اشتريته يظهر هنا داخل حسابك.</p>
+                  <p>كل مشترياتك محفوظة داخل حسابك.</p>
                 </div>
               </div>
               <div class="list" id="myPurchases"></div>
             </div>
             <div class="panel" style="padding:16px">
-              <div class="section-title" style="margin-top:0">
+              <div class="section-head" style="margin-top:0">
                 <div>
                   <h3>آخر نشاط</h3>
-                  <p>سجل سريع للمشتريات والتحديثات.</p>
+                  <p>سجل بسيط وسريع.</p>
                 </div>
               </div>
               <div class="list" id="activityList"></div>
@@ -417,27 +267,26 @@
 
           <div class="account-grid hidden" id="adminArea">
             <div class="panel" style="padding:16px">
-              <div class="section-title" style="margin-top:0">
+              <div class="section-head" style="margin-top:0">
                 <div>
                   <h3>لوحة الأدمن</h3>
                   <p>المستخدم: <b>2@gmail.com</b></p>
                 </div>
               </div>
-              <div class="stats">
-                <div class="stat"><span>المحاضرات</span><b id="adminLectures">0</b></div>
-                <div class="stat"><span>المشتريات</span><b id="adminPurchases">0</b></div>
-                <div class="stat"><span>التعليقات</span><b id="adminComments">0</b></div>
+              <div class="grid-2">
+                <div class="item"><div class="mini">المحاضرات</div><b id="adminLectures" style="font-size:22px">0</b></div>
+                <div class="item"><div class="mini">المشتريات</div><b id="adminPurchases" style="font-size:22px">0</b></div>
               </div>
-              <div class="footer-note">عند فتح أي محاضرة، سيظهر عدد المشترين ومعرّفاتهم.</div>
+              <div style="margin-top:12px" class="item"><div class="mini">التعليقات</div><b id="adminComments" style="font-size:22px">0</b></div>
             </div>
             <div class="panel" style="padding:16px">
-              <div class="section-title" style="margin-top:0">
+              <div class="section-head" style="margin-top:0">
                 <div>
-                  <h3>ملاحظات الأدمن</h3>
-                  <p>يمكنك تعديل/حذف أي تعليق داخل المحاضرة.</p>
+                  <h3>ملاحظة</h3>
+                  <p>إدارة التعليقات والبيانات تظهر داخل نافذة المحاضرة.</p>
                 </div>
               </div>
-              <div class="empty">لا توجد أدوات إدارة إضافية هنا لأن التحكم يظهر داخل نافذة المحاضرة نفسها.</div>
+              <div class="empty">أدوات الأدمن تظهر فقط عند فتح المحاضرة.</div>
             </div>
           </div>
 
@@ -459,25 +308,32 @@
       <div class="modal-body">
         <div class="lecture-layout">
           <div class="panel" style="padding:14px">
-            <div class="video-wrap">
-              <iframe id="lectureFrame" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <div class="doc-box" style="margin-top:14px">
-              <div class="section-title" style="margin-top:0">
+            <img id="lectureThumb" class="inline-image" alt="صورة المحاضرة" />
+            <div class="box" style="margin-top:14px">
+              <div class="section-head" style="margin-top:0">
                 <div>
-                  <h3>الوصف الكامل</h3>
+                  <h3>الوصف</h3>
                   <p id="fullDescription"></p>
                 </div>
               </div>
               <div class="controls" id="lectureActions"></div>
             </div>
 
-            <div class="doc-box" style="margin-top:14px">
-              <div class="section-title" style="margin-top:0">
+            <div class="box" id="adminOnlyVideoBox" style="margin-top:14px">
+              <div class="section-head" style="margin-top:0">
+                <div>
+                  <h3>الفيديو</h3>
+                  <p>يظهر للأدمن فقط.</p>
+                </div>
+              </div>
+              <div class="video-wrap"><iframe id="lectureFrame" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+            </div>
+
+            <div class="box" id="adminOnlyFilesBox" style="margin-top:14px">
+              <div class="section-head" style="margin-top:0">
                 <div>
                   <h3>ملفات HTML</h3>
-                  <p>اضغط على أي ملف لفتحه في صفحة مستقلة.</p>
+                  <p>تظهر للأدمن فقط.</p>
                 </div>
               </div>
               <div class="file-list" id="fileList"></div>
@@ -485,24 +341,24 @@
           </div>
 
           <div class="panel" style="padding:14px">
-            <div class="buyers-box">
-              <div class="section-title" style="margin-top:0">
+            <div class="box" id="adminOnlyBuyersBox">
+              <div class="section-head" style="margin-top:0">
                 <div>
                   <h3>المشترون</h3>
-                  <p>عدد الذين اشتروا هذه المحاضرة ومعرّفاتهم.</p>
+                  <p>تظهر للأدمن فقط.</p>
                 </div>
               </div>
               <div class="buyer-list" id="buyerList"></div>
             </div>
 
-            <div class="comment-box" style="margin-top:14px">
-              <div class="section-title" style="margin-top:0">
+            <div class="box" style="margin-top:14px">
+              <div class="section-head" style="margin-top:0">
                 <div>
-                  <h3>الشات / التعليقات</h3>
-                  <p>يمكن للعميل التعليق، والأدمن يستطيع تعديل أو حذف أي تعليق.</p>
+                  <h3>التعليقات</h3>
+                  <p>يمكنك التعليق، والأدمن يقدر يعدل أو يحذف أي تعليق.</p>
                 </div>
               </div>
-              <div class="input-inline" style="margin-bottom:12px">
+              <div class="input-inline" style="display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:12px">
                 <textarea id="commentInput" placeholder="اكتب تعليقك هنا..."></textarea>
                 <button class="btn small" id="sendCommentBtn" type="button">إرسال</button>
               </div>
@@ -519,35 +375,23 @@
       <div class="modal-head">
         <div>
           <h3>إعدادات الحساب</h3>
-          <div class="mini">تغيير الاسم والمنطقة وحفظهما داخل الحساب.</div>
+          <div class="mini">غيّر الاسم والمنطقة واحفظهما داخل حسابك.</div>
         </div>
         <button class="close" id="closeSettingsModal" type="button">×</button>
       </div>
       <div class="modal-body">
-        <div class="settings-box">
+        <div class="box">
           <div class="grid-2">
-            <div>
-              <label class="mini">الاسم</label>
-              <input id="settingName" type="text" placeholder="اسمك" />
-            </div>
-            <div>
-              <label class="mini">المنطقة</label>
-              <input id="settingRegion" type="text" placeholder="القاهرة" />
-            </div>
+            <div><label class="mini">الاسم</label><input id="settingName" type="text" placeholder="اسمك" /></div>
+            <div><label class="mini">المنطقة</label><input id="settingRegion" type="text" placeholder="القاهرة" /></div>
           </div>
-          <div style="margin-top:12px" class="grid-2">
-            <div>
-              <label class="mini">البريد الإلكتروني</label>
-              <input id="settingEmail" type="email" disabled />
-            </div>
-            <div>
-              <label class="mini">الكود التعريفي</label>
-              <input id="settingPublicId" type="text" disabled />
-            </div>
+          <div class="grid-2" style="margin-top:12px">
+            <div><label class="mini">البريد الإلكتروني</label><input id="settingEmail" type="email" disabled /></div>
+            <div><label class="mini">الكود التعريفي</label><input id="settingPublicId" type="text" disabled /></div>
           </div>
           <div class="controls" style="margin-top:14px">
             <button class="btn" id="saveSettingsBtn" type="button">حفظ التغييرات</button>
-            <a class="support-link" href="https://wa.me/201124680211" target="_blank" rel="noopener noreferrer">تواصل واتساب</a>
+            <a class="support-link" href="https://wa.me/201124680211" target="_blank" rel="noopener noreferrer">واتساب الدعم</a>
             <button class="btn ghost" id="closeSettingsBtn" type="button">إغلاق</button>
           </div>
         </div>
@@ -560,13 +404,13 @@
       <div class="modal-head">
         <div>
           <h3>تسجيل الدخول مطلوب</h3>
-          <div class="mini">هذا الملف يعمل بعد ربط الحساب بـ Firebase Auth.</div>
+          <div class="mini">هذا الملف يعمل بعد تسجيل الدخول من صفحة الإعداد.</div>
         </div>
       </div>
       <div class="modal-body">
         <div class="login-box">
           <h3>ادخل بحسابك</h3>
-          <p>بعد الدخول ستظهر لك المحاضرات، المشتريات، والرصيد.</p>
+          <p>بعد الدخول ستظهر لك المحاضرات، المشتريات، والرّدود.</p>
           <a class="recharge-link" href="medo_fast_ready.html">العودة لصفحة الدخول</a>
         </div>
       </div>
@@ -575,28 +419,9 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
     import {
-      getAuth,
-      onAuthStateChanged,
-      signOut,
-      updateProfile
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-    import {
-      getFirestore,
-      doc,
-      getDoc,
-      setDoc,
-      updateDoc,
-      collection,
-      addDoc,
-      getDocs,
-      query,
-      orderBy,
-      limit,
-      where,
-      serverTimestamp,
-      arrayUnion,
-      arrayRemove
+      getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc, getDocs, query, orderBy, limit, where, serverTimestamp, arrayUnion
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -617,7 +442,6 @@
     const db = getFirestore(app);
 
     const $ = (id) => document.getElementById(id);
-
     const els = {
       message: $("message"),
       helloTitle: $("helloTitle"),
@@ -642,12 +466,12 @@
       adminLectures: $("adminLectures"),
       adminPurchases: $("adminPurchases"),
       adminComments: $("adminComments"),
-
       lectureModal: $("lectureModal"),
       closeLectureModal: $("closeLectureModal"),
       modalLectureTitle: $("modalLectureTitle"),
       modalLectureMeta: $("modalLectureMeta"),
       lectureFrame: $("lectureFrame"),
+      lectureThumb: $("lectureThumb"),
       fullDescription: $("fullDescription"),
       lectureActions: $("lectureActions"),
       fileList: $("fileList"),
@@ -655,7 +479,6 @@
       commentList: $("commentList"),
       commentInput: $("commentInput"),
       sendCommentBtn: $("sendCommentBtn"),
-
       settingsModal: $("settingsModal"),
       closeSettingsModal: $("closeSettingsModal"),
       closeSettingsBtn: $("closeSettingsBtn"),
@@ -664,22 +487,17 @@
       settingEmail: $("settingEmail"),
       settingPublicId: $("settingPublicId"),
       saveSettingsBtn: $("saveSettingsBtn"),
-
-      gateModal: $("gateModal")
+      gateModal: $("gateModal"),
+      adminOnlyVideoBox: $("adminOnlyVideoBox"),
+      adminOnlyFilesBox: $("adminOnlyFilesBox"),
+      adminOnlyBuyersBox: $("adminOnlyBuyersBox")
     };
 
-    const state = {
-      user: null,
-      profile: null,
-      lectures: [],
-      currentLecture: null,
-      purchases: [],
-      comments: [],
-      buyers: [],
-      admin: false,
-      loading: true,
-      lastActivity: []
-    };
+    const lectureThumbs = [
+      "data:image/svg+xml;charset=UTF-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'%3E%20%20%20%20%20%20%3Cdefs%3E%20%20%20%20%20%20%20%20%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='0%'%20stop-color='%230f172a'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='52%'%20stop-color='%230ea5e9'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='100%'%20stop-color='%2322c55e'/%3E%20%20%20%20%20%20%20%20%3C/linearGradient%3E%20%20%20%20%20%20%3C/defs%3E%20%20%20%20%20%20%3Crect%20width='800'%20height='450'%20rx='36'%20fill='url(%23g)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='670'%20cy='70'%20r='110'%20fill='rgba(255,255,255,.12)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='120'%20cy='360'%20r='150'%20fill='rgba(255,255,255,.10)'/%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='47%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='46'%20font-weight='700'%20fill='white'%3Eأساسيات%20المنصة%3C/text%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='58%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='22'%20fill='rgba(255,255,255,.9)'%3Emedo%3C/text%3E%20%20%20%20%3C/svg%3E",
+      "data:image/svg+xml;charset=UTF-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'%3E%20%20%20%20%20%20%3Cdefs%3E%20%20%20%20%20%20%20%20%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='0%'%20stop-color='%23111827'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='52%'%20stop-color='%238b5cf6'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='100%'%20stop-color='%2338bdf8'/%3E%20%20%20%20%20%20%20%20%3C/linearGradient%3E%20%20%20%20%20%20%3C/defs%3E%20%20%20%20%20%20%3Crect%20width='800'%20height='450'%20rx='36'%20fill='url(%23g)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='670'%20cy='70'%20r='110'%20fill='rgba(255,255,255,.12)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='120'%20cy='360'%20r='150'%20fill='rgba(255,255,255,.10)'/%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='47%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='46'%20font-weight='700'%20fill='white'%3Eالشرح%20المتوسط%3C/text%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='58%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='22'%20fill='rgba(255,255,255,.9)'%3Emedo%3C/text%3E%20%20%20%20%3C/svg%3E",
+      "data:image/svg+xml;charset=UTF-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'%3E%20%20%20%20%20%20%3Cdefs%3E%20%20%20%20%20%20%20%20%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='0%'%20stop-color='%230f172a'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='52%'%20stop-color='%23f97316'/%3E%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset='100%'%20stop-color='%238b5cf6'/%3E%20%20%20%20%20%20%20%20%3C/linearGradient%3E%20%20%20%20%20%20%3C/defs%3E%20%20%20%20%20%20%3Crect%20width='800'%20height='450'%20rx='36'%20fill='url(%23g)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='670'%20cy='70'%20r='110'%20fill='rgba(255,255,255,.12)'/%3E%20%20%20%20%20%20%3Ccircle%20cx='120'%20cy='360'%20r='150'%20fill='rgba(255,255,255,.10)'/%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='47%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='46'%20font-weight='700'%20fill='white'%3Eالمستوى%20المتقدم%3C/text%3E%20%20%20%20%20%20%3Ctext%20x='50%'%20y='58%'%20text-anchor='middle'%20dominant-baseline='middle'%20%20%20%20%20%20%20%20%20%20%20%20font-family='Arial,%20sans-serif'%20font-size='22'%20fill='rgba(255,255,255,.9)'%3Emedo%3C/text%3E%20%20%20%20%3C/svg%3E"
+    ];
 
     const demoLectures = [
       {
@@ -689,9 +507,8 @@
         description: "محاضرة تأسيسية توضح طريقة الاستخدام، كيف تنتقل بين الأجزاء، وكيف تتعامل مع الشراء والتعليقات والملفات المرتبطة داخل المحاضرة.",
         price: 20,
         videoId: "dQw4w9WgXcQ",
-        htmlFiles: [
-          { name: "ملف شرح HTML", content: "<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><title>HTML</title></head><body style='font-family:system-ui;padding:24px'><h1>ملف HTML تجريبي</h1><p>هذا ملف يفتح كصفحة مستقلة.</p></body></html>" }
-        ],
+        imageUrl: lectureThumbs[0],
+        htmlFiles: [{ name: "ملف شرح HTML", content: "<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><title>HTML</title></head><body style='font-family:system-ui;padding:24px'><h1>ملف HTML تجريبي</h1><p>هذا ملف يفتح كصفحة مستقلة.</p></body></html>" }],
         createdAtMs: Date.now() - 200000,
         active: true
       },
@@ -702,9 +519,8 @@
         description: "هذه محاضرة أطول، لذلك ستظهر لك عبارة عرض المزيد في الكارد. داخلها فيديو خاص، ملفات HTML، وتحديثات تظهر مباشرة في التعليقات مع حفظ الشراء في الحساب.",
         price: 35,
         videoId: "M7lc1UVf-VE",
-        htmlFiles: [
-          { name: "صفحة ملخص", content: "<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><title>ملخص</title></head><body style='font-family:system-ui;padding:24px'><h1>ملخص المحاضرة</h1><p>محتوى صفحة HTML مفتوحة من داخل p1.</p></body></html>" }
-        ],
+        imageUrl: lectureThumbs[1],
+        htmlFiles: [{ name: "صفحة ملخص", content: "<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><title>ملخص</title></head><body style='font-family:system-ui;padding:24px'><h1>ملخص المحاضرة</h1><p>محتوى صفحة HTML مفتوحة من داخل p1.</p></body></html>" }],
         createdAtMs: Date.now() - 100000,
         active: true
       },
@@ -715,176 +531,102 @@
         description: "محاضرة متقدمة مع شرح أوسع، سعر أعلى، وسجل مشتريات يظهر للأدمن مع IDs المشترين داخل المحاضرة نفسها.",
         price: 50,
         videoId: "ysz5S6PUM-U",
+        imageUrl: lectureThumbs[2],
         htmlFiles: [],
         createdAtMs: Date.now() - 50000,
         active: true
       }
     ];
 
-    function setMsg(text, type = "") {
-      els.message.className = "msg " + type;
-      els.message.textContent = text || "";
-    }
+    const state = { user: null, profile: null, lectures: [], purchases: [], comments: [], buyers: [], activity: [], currentLecture: null };
+    const isAdmin = () => String(state.user?.email || "").toLowerCase() === ADMIN_EMAIL;
 
-    function waLink(text) {
-      return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-    }
+    function setMsg(text, type=""){ els.message.className = "msg " + type; els.message.textContent = text || ""; }
+    function waLink(text){ return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`; }
+    function rechargeLink(){ return waLink(`طلب شحن كوينز من منصة medo. البريد: ${state.profile?.email || state.user?.email || "غير مذكور"}`); }
+    function supportLink(){ return waLink("تواصل مع الدعم في منصة medo"); }
+    function safe(s=""){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;"); }
+    function ms(v){ if(!v) return 0; if(typeof v==="number") return v; if(v?.seconds) return v.seconds*1000; if(typeof v?.toMillis==="function") return v.toMillis(); return 0; }
+    function fmtDate(v){ return new Intl.DateTimeFormat("ar-EG",{dateStyle:"medium",timeStyle:"short"}).format(new Date(ms(v)||Date.now())); }
+    function lecturePurchased(id){ return Array.isArray(state.profile?.purchasedLectureIds) && state.profile.purchasedLectureIds.includes(id); }
+    function lectureById(id){ return state.lectures.find(l => l.id === id); }
+    function lectureEmbed(videoId){ return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(String(videoId||"").trim())}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3`; }
+    function truncate(text, len=108){ const t=String(text||""); return t.length>len ? t.slice(0,len).trimEnd()+"…" : t; }
 
-    function rechargeLink() {
-      const t = `طلب شحن كوينز من منصة medo. البريد: ${state.profile?.email || state.user?.email || "غير مذكور"}`;
-      return waLink(t);
-    }
-
-    function supportLink() {
-      return waLink("تواصل مع الدعم في منصة medo");
-    }
-
-    function safe(s = "") {
-      return String(s)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function ms(v) {
-      if (!v) return 0;
-      if (typeof v === "number") return v;
-      if (v?.seconds) return v.seconds * 1000;
-      if (typeof v?.toMillis === "function") return v.toMillis();
-      return 0;
-    }
-
-    function fmtDate(v) {
-      const d = new Date(ms(v) || Date.now());
-      return new Intl.DateTimeFormat("ar-EG", { dateStyle: "medium", timeStyle: "short" }).format(d);
-    }
-
-    function truncate(text, len = 120) {
-      const t = String(text || "");
-      return t.length > len ? t.slice(0, len).trimEnd() + "…" : t;
-    }
-
-    function isAdmin() {
-      return String(state.user?.email || "").toLowerCase() === ADMIN_EMAIL;
-    }
-
-    function lecturePurchased(lectureId) {
-      return Array.isArray(state.profile?.purchasedLectureIds) && state.profile.purchasedLectureIds.includes(lectureId);
-    }
-
-    function lectureById(id) {
-      return state.lectures.find(l => l.id === id);
-    }
-
-    function lectureEmbed(videoId) {
-      const id = String(videoId || "").trim();
-      if (!id) return "";
-      return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3`;
-    }
-
-    async function loadProfile(user) {
+    async function loadProfile(user){
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
       if (!snap.exists()) {
-        const profile = {
-          uid: user.uid,
-          email: user.email || "",
-          emailLower: String(user.email || "").toLowerCase(),
-          name: user.displayName || "مستخدم",
-          nameLower: String(user.displayName || "مستخدم").toLowerCase(),
-          region: "",
-          publicId: "",
-          coins: 0,
-          purchasedLectureIds: [],
-          online: true,
-          createdAtMs: Date.now(),
-          updatedAtMs: Date.now(),
-          lastSeenMs: Date.now()
-        };
-        await setDoc(ref, {
-          ...profile,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp()
-        }, { merge: true });
+        const profile = { uid:user.uid, email:user.email||"", emailLower:String(user.email||"").toLowerCase(), name:user.displayName||"مستخدم", nameLower:String(user.displayName||"مستخدم").toLowerCase(), region:"", publicId:"", coins:0, purchasedLectureIds:[], online:true, createdAtMs:Date.now(), updatedAtMs:Date.now(), lastSeenMs:Date.now() };
+        await setDoc(ref, { ...profile, createdAt: serverTimestamp(), updatedAt: serverTimestamp() }, { merge:true });
         return profile;
       }
-      return { uid: user.uid, ...snap.data() };
+      return { uid:user.uid, ...snap.data() };
     }
 
-    async function saveProfilePatch(patch) {
-      if (!state.user) return;
-      await setDoc(doc(db, "users", state.user.uid), {
-        ...patch,
-        updatedAt: serverTimestamp()
-      }, { merge: true });
+    async function saveProfilePatch(patch){
+      await setDoc(doc(db, "users", state.user.uid), { ...patch, updatedAt: serverTimestamp() }, { merge:true });
       state.profile = { ...state.profile, ...patch };
       syncHeader();
     }
 
-    async function setOnline(online) {
+    async function setOnline(online){
       if (!state.user) return;
-      await setDoc(doc(db, "users", state.user.uid), {
-        online,
-        lastSeenMs: Date.now(),
-        updatedAt: serverTimestamp()
-      }, { merge: true });
+      await setDoc(doc(db, "users", state.user.uid), { online, lastSeenMs: Date.now(), updatedAt: serverTimestamp() }, { merge:true });
     }
 
-    async function loadLectures() {
-      try {
+    async function loadLectures(){
+      try{
         const snap = await getDocs(query(collection(db, "lectures"), orderBy("createdAtMs", "desc")));
-        const data = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(l => l.active !== false);
+        const data = snap.docs.map(d => ({ id:d.id, ...d.data() })).filter(l => l.active !== false);
         state.lectures = data.length ? data : demoLectures;
-      } catch {
+      }catch{
         state.lectures = demoLectures;
       }
     }
 
-    async function loadPurchases() {
-      if (!state.user) return [];
-      try {
-        const q = query(collection(db, "users", state.user.uid, "purchases"), orderBy("purchasedAtMs", "desc"));
-        const snap = await getDocs(q);
-        state.purchases = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      } catch {
-        state.purchases = Array.isArray(state.profile?.purchasedLectureIds)
-          ? state.profile.purchasedLectureIds.map(id => ({ lectureId: id, purchasedAtMs: Date.now() }))
-          : [];
+    async function loadPurchases(){
+      if (!state.user) return;
+      try{
+        const snap = await getDocs(query(collection(db, "users", state.user.uid, "purchases"), orderBy("purchasedAtMs", "desc")));
+        state.purchases = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+      }catch{
+        state.purchases = (state.profile?.purchasedLectureIds || []).map(id => ({ lectureId:id, purchasedAtMs:Date.now() }));
       }
-      return state.purchases;
     }
 
-    async function loadActivity() {
-      if (!state.user) return [];
-      try {
-        const q = query(collection(db, "activity"), where("uid", "==", state.user.uid), orderBy("tsMs", "desc"), limit(12));
-        const snap = await getDocs(q);
-        state.lastActivity = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      } catch {
-        state.lastActivity = [];
+    async function loadActivity(){
+      if (!state.user) return;
+      try{
+        const snap = await getDocs(query(collection(db, "activity"), where("uid","==",state.user.uid), orderBy("tsMs","desc"), limit(10)));
+        state.activity = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+      }catch{
+        state.activity = [];
       }
-      return state.lastActivity;
     }
 
-    async function loadAdminStats() {
+    async function loadAdminStats(){
       if (!isAdmin()) return;
-      const [lecturesSnap, purchasesSnap, commentsSnap] = await Promise.all([
-        getDocs(collection(db, "lectures")),
-        getDocs(collection(db, "purchases")),
-        getDocs(collection(db, "comments"))
-      ]).catch(() => [null, null, null]);
-
-      els.adminLectures.textContent = String(lecturesSnap?.size ?? state.lectures.length);
-      els.adminPurchases.textContent = String(purchasesSnap?.size ?? 0);
-      els.adminComments.textContent = String(commentsSnap?.size ?? 0);
+      try{
+        const [l, p, c] = await Promise.all([
+          getDocs(collection(db, "lectures")),
+          getDocs(collection(db, "purchases")),
+          getDocs(collection(db, "comments"))
+        ]);
+        els.adminLectures.textContent = String(l.size);
+        els.adminPurchases.textContent = String(p.size);
+        els.adminComments.textContent = String(c.size);
+      }catch{
+        els.adminLectures.textContent = String(state.lectures.length);
+        els.adminPurchases.textContent = "0";
+        els.adminComments.textContent = "0";
+      }
     }
 
-    function syncHeader() {
+    function syncHeader(){
       if (!state.user) return;
       els.helloTitle.textContent = `مرحبًا ${state.profile?.name || state.user.displayName || "بك"}`;
-      els.helloSub.textContent = "كل ما تشتريه يُحفظ في حسابك، مع تعليقات وفيديو وملفات HTML داخل كل محاضرة.";
+      els.helloSub.textContent = "اشترِ المحاضرات واحفظها في حسابك، ومع الأدمن تظهر المحتويات الداخلية.";
       els.userTag.textContent = state.profile?.publicId ? `#${state.profile.publicId}` : (state.user.email || "حساب");
       els.coinsValue.textContent = String(Number(state.profile?.coins || 0));
       els.settingName.value = state.profile?.name || "";
@@ -893,48 +635,40 @@
       els.settingPublicId.value = state.profile?.publicId || "";
     }
 
-    function renderLectureCards() {
+    function renderLectureCards(){
       const q = String(els.searchInput.value || "").trim().toLowerCase();
       const filter = els.filterMode.value;
       const sort = els.sortMode.value;
-
       let list = [...state.lectures];
-      if (q) {
-        list = list.filter(l =>
-          String(l.title || "").toLowerCase().includes(q) ||
-          String(l.shortDescription || "").toLowerCase().includes(q) ||
-          String(l.description || "").toLowerCase().includes(q)
-        );
-      }
+
+      if (q) list = list.filter(l => [l.title,l.shortDescription,l.description].some(x => String(x||"").toLowerCase().includes(q)));
       if (filter === "purchased") list = list.filter(l => lecturePurchased(l.id));
       if (filter === "available") list = list.filter(l => !lecturePurchased(l.id));
 
-      list.sort((a, b) => {
-        if (sort === "priceAsc") return (a.price || 0) - (b.price || 0);
-        if (sort === "priceDesc") return (b.price || 0) - (a.price || 0);
-        return (b.createdAtMs || 0) - (a.createdAtMs || 0);
+      list.sort((a,b)=>{
+        if (sort === "priceAsc") return (a.price||0)-(b.price||0);
+        if (sort === "priceDesc") return (b.price||0)-(a.price||0);
+        return (b.createdAtMs||0)-(a.createdAtMs||0);
       });
 
       els.lectureCount.textContent = `${list.length} محاضرة`;
-
       if (!list.length) {
         els.lecturesList.innerHTML = `<div class="empty" style="grid-column:1/-1">لا توجد محاضرات مطابقة الآن.</div>`;
         return;
       }
 
       els.lecturesList.innerHTML = list.map(l => {
-        const full = String(l.description || l.shortDescription || "");
-        const showMore = full.length > 85;
         const bought = lecturePurchased(l.id);
         return `
           <article class="lecture">
+            <img class="thumb" src="${safe(l.imageUrl || lectureThumbs[0])}" alt="${safe(l.title || 'محاضرة')}" loading="lazy" decoding="async" />
             <div class="meta">
               <span class="price">${safe(l.price || 0)} كوينز</span>
               <span class="tag ${bought ? "green" : ""}">${bought ? "مشتراة" : "متاحة"}</span>
             </div>
             <div>
               <h4>${safe(l.title || "بدون عنوان")}</h4>
-              <div class="desc">${safe(truncate(l.shortDescription || full, 100))}</div>
+              <div class="desc">${safe(truncate(l.shortDescription || l.description || "", 110))}</div>
             </div>
             <div class="actions">
               <button class="btn small" data-open="${safe(l.id)}" type="button">عرض المزيد</button>
@@ -945,81 +679,57 @@
       }).join("");
     }
 
-    function renderPurchases() {
+    function renderPurchases(){
       const items = state.purchases || [];
-      if (!items.length) {
-        els.myPurchases.innerHTML = `<div class="empty">لا توجد محاضرات مشتراة بعد.</div>`;
-        return;
-      }
+      if (!items.length) return els.myPurchases.innerHTML = `<div class="empty">لا توجد محاضرات مشتراة بعد.</div>`;
       els.myPurchases.innerHTML = items.map(p => {
         const lecture = lectureById(p.lectureId) || {};
         return `
-          <div class="list-item">
-            <div>
-              <div><b>${safe(lecture.title || p.title || p.lectureId)}</b></div>
-              <small>${fmtDate(p.purchasedAtMs || p.tsMs || Date.now())}</small>
+          <div class="item">
+            <div class="item-top">
+              <div><b>${safe(lecture.title || p.lectureId)}</b><div class="mini">${fmtDate(p.purchasedAtMs || Date.now())}</div></div>
+              <span class="tag green">محفوظة</span>
             </div>
-            <span class="tag green">محفوظة</span>
           </div>
         `;
       }).join("");
     }
 
-    function renderActivity() {
-      if (!state.lastActivity.length) {
-        els.activityList.innerHTML = `<div class="empty">لا توجد نشاطات حديثة.</div>`;
-        return;
-      }
-      els.activityList.innerHTML = state.lastActivity.map(a => `
-        <div class="list-item">
-          <div>
-            <div><b>${safe(a.type || "نشاط")}</b></div>
-            <small>${fmtDate(a.tsMs || a.purchasedAtMs || Date.now())}</small>
+    function renderActivity(){
+      if (!state.activity.length) return els.activityList.innerHTML = `<div class="empty">لا توجد نشاطات حديثة.</div>`;
+      els.activityList.innerHTML = state.activity.map(a => `
+        <div class="item">
+          <div class="item-top">
+            <div><b>${safe(a.type || "نشاط")}</b><div class="mini">${fmtDate(a.tsMs || Date.now())}</div></div>
+            <span class="tag">${safe(a.lectureTitle || a.lectureId || "")}</span>
           </div>
-          <span class="tag">${safe(a.lectureTitle || a.lectureId || "")}</span>
         </div>
       `).join("");
     }
 
-    function renderBuyers() {
-      if (!isAdmin()) {
-        els.buyerList.innerHTML = `<div class="empty">المشترون يظهرون للأدمن فقط.</div>`;
-        return;
-      }
-      if (!state.buyers.length) {
-        els.buyerList.innerHTML = `<div class="empty">لا يوجد مشترون لهذه المحاضرة بعد.</div>`;
-        return;
-      }
+    function renderBuyers(){
+      if (!isAdmin()) return els.buyerList.innerHTML = `<div class="empty">المشترون يظهرون للأدمن فقط.</div>`;
+      if (!state.buyers.length) return els.buyerList.innerHTML = `<div class="empty">لا يوجد مشترون لهذه المحاضرة بعد.</div>`;
       els.buyerList.innerHTML = state.buyers.map(b => `
         <div class="buyer-item">
-          <div class="buyer-top">
-            <div>
-              <div><b>${safe(b.name || "مستخدم")}</b> <span class="tag purple">#${safe(b.publicId || "-----")}</span></div>
-              <small>${safe(b.email || "")}</small>
-            </div>
+          <div class="item-top">
+            <div><b>${safe(b.name || "مستخدم")}</b> <span class="tag purple">#${safe(b.publicId || "-----")}</span><div class="mini">${safe(b.email || "")}</div></div>
             <span class="tag green">اشترى</span>
           </div>
-          <div class="mini">${fmtDate(b.purchasedAtMs || b.tsMs || Date.now())}</div>
+          <div class="mini" style="margin-top:6px">${fmtDate(b.purchasedAtMs || Date.now())}</div>
         </div>
       `).join("");
     }
 
-    function renderComments() {
-      const list = state.comments || [];
-      if (!list.length) {
-        els.commentList.innerHTML = `<div class="empty">لا توجد تعليقات بعد. كن أول من يكتب.</div>`;
-        return;
-      }
-      els.commentList.innerHTML = list.map(c => {
+    function renderComments(){
+      if (!state.comments.length) return els.commentList.innerHTML = `<div class="empty">لا توجد تعليقات بعد.</div>`;
+      els.commentList.innerHTML = state.comments.map(c => {
         const mine = state.user && c.uid === state.user.uid;
         const canEdit = mine || isAdmin();
         return `
           <div class="comment-item" data-comment-id="${safe(c.id)}">
-            <div class="comment-top">
-              <div>
-                <div><b>${safe(c.name || "مستخدم")}</b> <span class="tag purple">#${safe(c.publicId || "-----")}</span></div>
-                <small>${fmtDate(c.createdAtMs || c.tsMs || Date.now())}${c.editedAtMs ? " • تم التعديل" : ""}</small>
-              </div>
+            <div class="item-top">
+              <div><b>${safe(c.name || "مستخدم")}</b> <span class="tag purple">#${safe(c.publicId || "-----")}</span><div class="mini">${fmtDate(c.createdAtMs || Date.now())}${c.editedAtMs ? " • تم التعديل" : ""}</div></div>
               ${isAdmin() ? '<span class="tag red">أدمن</span>' : ''}
             </div>
             <div style="margin-top:10px;line-height:1.8">${safe(c.text || "")}</div>
@@ -1033,40 +743,56 @@
       }).join("");
     }
 
-    async function openLecture(id) {
+    async function loadLectureSocial(id){
+      try{
+        const snap = await getDocs(query(collection(db, "lectures", id, "comments"), orderBy("createdAtMs", "asc")));
+        state.comments = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+      }catch{ state.comments = []; }
+
+      if (isAdmin()) {
+        try{
+          const bSnap = await getDocs(query(collection(db, "lectures", id, "buyers"), orderBy("purchasedAtMs", "desc")));
+          state.buyers = bSnap.docs.map(d => ({ id:d.id, ...d.data() }));
+        }catch{ state.buyers = []; }
+      } else {
+        state.buyers = [];
+      }
+    }
+
+    async function openLecture(id){
       const lecture = lectureById(id);
       if (!lecture) return;
       state.currentLecture = lecture;
-
+      const admin = isAdmin();
       els.modalLectureTitle.textContent = lecture.title || "محاضرة";
       els.modalLectureMeta.textContent = `${lecture.price || 0} كوينز • ${lecture.shortDescription || ""}`;
+      els.lectureThumb.src = lecture.imageUrl || lectureThumbs[0];
+      els.lectureThumb.alt = lecture.title || "صورة المحاضرة";
       els.fullDescription.textContent = lecture.description || lecture.shortDescription || "";
-      els.lectureFrame.src = lectureEmbed(lecture.videoId || "");
-
-      const purchased = lecturePurchased(lecture.id);
-
       els.lectureActions.innerHTML = `
-        <button class="btn ${purchased ? "secondary" : ""}" id="buyLectureBtn" type="button">
-          ${purchased ? "تم الشراء" : `شراء المحاضرة بـ ${lecture.price || 0} كوينز`}
-        </button>
-        <a class="support-link" href="${supportLink()}" target="_blank" rel="noopener noreferrer">الدعم عبر واتساب</a>
+        <button class="btn ${lecturePurchased(lecture.id) ? "secondary" : ""}" id="buyLectureBtn" type="button">${lecturePurchased(lecture.id) ? "تم الشراء" : `شراء المحاضرة بـ ${lecture.price || 0} كوينز`}</button>
+        <a class="support-link" href="${supportLink()}" target="_blank" rel="noopener noreferrer">الدعم</a>
         <button class="btn ghost" id="openRechargeInModal" type="button">الشحن</button>
       `;
+      els.adminOnlyVideoBox.classList.toggle("hidden", !admin);
+      els.adminOnlyFilesBox.classList.toggle("hidden", !admin);
+      els.adminOnlyBuyersBox.classList.toggle("hidden", !admin);
+      els.lectureFrame.src = admin ? lectureEmbed(lecture.videoId || "") : "about:blank";
 
-      els.fileList.innerHTML = (lecture.htmlFiles && lecture.htmlFiles.length)
-        ? lecture.htmlFiles.map((f, idx) => `
-            <div class="file-item">
-              <div><b>${safe(f.name || `ملف ${idx + 1}`)}</b></div>
-              <small>${f.url ? "ملف خارجي" : "ملف HTML محلي"}</small>
-              <div style="margin-top:10px">
-                <button class="btn small ghost" type="button" data-open-file="${idx}">فتح الصفحة</button>
+      els.fileList.innerHTML = admin
+        ? ((lecture.htmlFiles && lecture.htmlFiles.length)
+          ? lecture.htmlFiles.map((f, idx) => `
+              <div class="file-item">
+                <div><b>${safe(f.name || `ملف ${idx + 1}`)}</b></div>
+                <div class="mini">${f.url ? "ملف خارجي" : "ملف HTML محلي"}</div>
+                <div style="margin-top:10px"><button class="btn small ghost" type="button" data-open-file="${idx}">فتح الصفحة</button></div>
               </div>
-            </div>
-          `).join("")
-        : `<div class="empty">لا توجد ملفات HTML لهذه المحاضرة.</div>`;
+            `).join("")
+          : `<div class="empty">لا توجد ملفات HTML لهذه المحاضرة.</div>`)
+        : `<div class="empty">الملفات متاحة للأدمن فقط.</div>`;
 
       els.lectureModal.classList.add("show");
-      els.lectureModal.setAttribute("aria-hidden", "false");
+      els.lectureModal.setAttribute("aria-hidden","false");
 
       await loadLectureSocial(id);
       renderBuyers();
@@ -1076,57 +802,28 @@
       $("openRechargeInModal").onclick = () => window.open(rechargeLink(), "_blank", "noopener,noreferrer");
     }
 
-    async function loadLectureSocial(id) {
-      // comments
-      try {
-        const cSnap = await getDocs(query(collection(db, "lectures", id, "comments"), orderBy("createdAtMs", "asc")));
-        state.comments = cSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-      } catch {
-        state.comments = [];
-      }
-
-      // buyers
-      if (isAdmin()) {
-        try {
-          const bSnap = await getDocs(query(collection(db, "lectures", id, "buyers"), orderBy("purchasedAtMs", "desc")));
-          state.buyers = bSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-        } catch {
-          state.buyers = [];
-        }
-      } else {
-        state.buyers = [];
-      }
-    }
-
-    async function buyCurrentLecture() {
+    async function buyCurrentLecture(){
       const lecture = state.currentLecture;
       if (!lecture || !state.user || !state.profile) return;
-      if (lecturePurchased(lecture.id)) {
-        setMsg("هذه المحاضرة مشتراة بالفعل.", "ok");
-        return;
-      }
+      if (lecturePurchased(lecture.id)) return setMsg("هذه المحاضرة مشتراة بالفعل.", "ok");
+
       const price = Number(lecture.price || 0);
       const coins = Number(state.profile.coins || 0);
       if (coins < price) {
-        setMsg("رصيدك لا يكفي. استخدم زر الشحن.", "error");
+        setMsg("رصيدك لا يكفي. افتح الشحن الآن.", "error");
         window.open(rechargeLink(), "_blank", "noopener,noreferrer");
         return;
       }
 
       const nextCoins = coins - price;
       const now = Date.now();
-      const lectureRef = doc(db, "lectures", lecture.id);
-      const userRef = doc(db, "users", state.user.uid);
-      const purchaseRef = doc(collection(db, "users", state.user.uid, "purchases"));
-      const buyerRef = doc(db, "lectures", lecture.id, "buyers", state.user.uid);
-
-      await setDoc(userRef, {
+      await setDoc(doc(db, "users", state.user.uid), {
         coins: nextCoins,
         purchasedLectureIds: arrayUnion(lecture.id),
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      }, { merge:true });
 
-      await setDoc(purchaseRef, {
+      await setDoc(doc(collection(db, "users", state.user.uid, "purchases")), {
         lectureId: lecture.id,
         lectureTitle: lecture.title || "",
         price,
@@ -1136,13 +833,13 @@
         email: state.profile.email || state.user.email || ""
       });
 
-      await setDoc(buyerRef, {
+      await setDoc(doc(db, "lectures", lecture.id, "buyers", state.user.uid), {
         uid: state.user.uid,
         publicId: state.profile.publicId || "",
-        name: state.profile.name || state.user.displayName || "",
+        name: state.profile.name || state.user.displayName || "مستخدم",
         email: state.profile.email || state.user.email || "",
         purchasedAtMs: now
-      }, { merge: true });
+      }, { merge:true });
 
       await addDoc(collection(db, "activity"), {
         uid: state.user.uid,
@@ -1151,21 +848,23 @@
         lectureTitle: lecture.title || "",
         price,
         tsMs: now
-      });
+      }).catch(() => {});
 
       state.profile.coins = nextCoins;
       state.profile.purchasedLectureIds = Array.from(new Set([...(state.profile.purchasedLectureIds || []), lecture.id]));
       els.coinsValue.textContent = String(nextCoins);
-      setMsg("تم شراء المحاضرة بنجاح وحفظها في حسابك.", "ok");
-
       state.purchases.unshift({ lectureId: lecture.id, lectureTitle: lecture.title || "", purchasedAtMs: now });
+
+      setMsg("تم شراء المحاضرة وحفظها داخل حسابك.", "ok");
       renderPurchases();
       renderLectureCards();
-      await loadLectureSocial(lecture.id);
-      renderBuyers();
+      if (isAdmin()) {
+        await loadLectureSocial(lecture.id);
+        renderBuyers();
+      }
     }
 
-    async function addComment() {
+    async function addComment(){
       const lecture = state.currentLecture;
       if (!lecture || !state.user || !state.profile) return;
       const text = String(els.commentInput.value || "").trim();
@@ -1180,116 +879,70 @@
         createdAtMs: Date.now(),
         editedAtMs: 0
       };
-
       const ref = await addDoc(collection(db, "lectures", lecture.id, "comments"), payload);
       state.comments.push({ id: ref.id, ...payload });
       els.commentInput.value = "";
       renderComments();
-      await addDoc(collection(db, "activity"), {
-        uid: state.user.uid,
-        type: "comment",
-        lectureId: lecture.id,
-        lectureTitle: lecture.title || "",
-        tsMs: Date.now()
-      });
+      await addDoc(collection(db, "activity"), { uid: state.user.uid, type: "comment", lectureId: lecture.id, lectureTitle: lecture.title || "", tsMs: Date.now() }).catch(() => {});
     }
 
-    async function editComment(commentId) {
+    async function editComment(id){
       const lecture = state.currentLecture;
-      const c = state.comments.find(x => x.id === commentId);
+      const c = state.comments.find(x => x.id === id);
       if (!lecture || !c) return;
       const next = prompt("اكتب التعليق الجديد:", c.text || "");
       if (next === null) return;
       const text = String(next).trim();
       if (!text) return;
-      await updateDoc(doc(db, "lectures", lecture.id, "comments", commentId), {
-        text,
-        editedAtMs: Date.now()
-      });
-      c.text = text;
-      c.editedAtMs = Date.now();
+      await updateDoc(doc(db, "lectures", lecture.id, "comments", id), { text, editedAtMs: Date.now() });
+      c.text = text; c.editedAtMs = Date.now();
       renderComments();
     }
 
-    async function deleteComment(commentId) {
+    async function deleteComment(id){
       const lecture = state.currentLecture;
-      const c = state.comments.find(x => x.id === commentId);
+      const c = state.comments.find(x => x.id === id);
       if (!lecture || !c) return;
       if (!confirm("حذف هذا التعليق؟")) return;
-      // Soft delete so it can be tracked if needed.
-      await updateDoc(doc(db, "lectures", lecture.id, "comments", commentId), {
-        deleted: true,
-        text: "[تم حذف التعليق]",
-        editedAtMs: Date.now()
-      });
-      state.comments = state.comments.map(x => x.id === commentId ? { ...x, text: "[تم حذف التعليق]", deleted: true } : x);
+      await updateDoc(doc(db, "lectures", lecture.id, "comments", id), { deleted:true, text:"[تم حذف التعليق]", editedAtMs: Date.now() });
+      state.comments = state.comments.map(x => x.id === id ? { ...x, text:"[تم حذف التعليق]", deleted:true } : x);
       renderComments();
     }
 
-    function openFile(file) {
+    function openFile(file){
       if (!file) return;
-      if (file.url) {
-        window.open(file.url, "_blank", "noopener,noreferrer");
-        return;
-      }
-      const html = String(file.content || "<!doctype html><html><body></body></html>");
-      const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+      if (file.url) return window.open(file.url, "_blank", "noopener,noreferrer");
+      const blob = new Blob([String(file.content || "<!doctype html><html><body></body></html>")], { type:"text/html;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       window.open(url, "_blank", "noopener,noreferrer");
       setTimeout(() => URL.revokeObjectURL(url), 10000);
     }
 
-    async function updateSettings() {
+    async function updateSettings(){
       const name = String(els.settingName.value || "").trim();
       const region = String(els.settingRegion.value || "").trim();
-      const patch = {
-        name,
-        nameLower: name.toLowerCase(),
-        region
-      };
-      await saveProfilePatch(patch);
-      if (state.user?.displayName !== name) {
-        await updateProfile(state.user, { displayName: name }).catch(() => {});
-      }
-      await addDoc(collection(db, "activity"), {
-        uid: state.user.uid,
-        type: "settings",
-        tsMs: Date.now()
-      }).catch(() => {});
+      await saveProfilePatch({ name, nameLower:name.toLowerCase(), region });
+      await updateProfile(state.user, { displayName: name }).catch(() => {});
       setMsg("تم حفظ الإعدادات.", "ok");
       els.settingsModal.classList.remove("show");
     }
 
-    async function refreshAll() {
+    async function refreshAll(){
       els.loadBar.style.width = "35%";
       setMsg("جارٍ التحديث...", "info");
       await loadLectures();
       await loadPurchases();
       await loadActivity();
-      renderLectureCards();
-      renderPurchases();
-      renderActivity();
-      syncHeader();
+      renderLectureCards(); renderPurchases(); renderActivity(); syncHeader();
       if (isAdmin()) await loadAdminStats();
       els.loadBar.style.width = "100%";
-      setTimeout(() => { els.loadBar.style.width = "0%"; }, 500);
+      setTimeout(() => els.loadBar.style.width = "0%", 350);
       setMsg("تم التحديث.", "ok");
     }
 
-    function closeModal(modal) {
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden", "true");
-      if (modal === els.lectureModal) {
-        els.lectureFrame.src = "about:blank";
-      }
-    }
+    function closeModal(modal){ modal.classList.remove("show"); modal.setAttribute("aria-hidden","true"); if(modal===els.lectureModal) els.lectureFrame.src="about:blank"; }
 
-    // Events
-    els.logoutBtn.addEventListener("click", async () => {
-      if (state.user) await setOnline(false).catch(() => {});
-      await signOut(auth);
-      location.href = "medo_fast_ready.html";
-    });
+    els.logoutBtn.addEventListener("click", async () => { if (state.user) await setOnline(false).catch(()=>{}); await signOut(auth); location.href = "medo_fast_ready.html"; });
     els.supportBtn.addEventListener("click", () => window.open(supportLink(), "_blank", "noopener,noreferrer"));
     els.rechargeBtn.addEventListener("click", () => window.open(rechargeLink(), "_blank", "noopener,noreferrer"));
     els.coinsBtn.addEventListener("click", () => window.open(rechargeLink(), "_blank", "noopener,noreferrer"));
@@ -1298,30 +951,19 @@
     els.closeSettingsModal.addEventListener("click", () => closeModal(els.settingsModal));
     els.closeSettingsBtn.addEventListener("click", () => closeModal(els.settingsModal));
     els.closeLectureModal.addEventListener("click", () => closeModal(els.lectureModal));
-
     els.searchInput.addEventListener("input", renderLectureCards);
     els.filterMode.addEventListener("change", renderLectureCards);
     els.sortMode.addEventListener("change", renderLectureCards);
-
     els.sendCommentBtn.addEventListener("click", addComment);
-    els.commentInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) addComment();
-    });
+    els.commentInput.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) addComment(); });
 
     els.lecturesList.addEventListener("click", async (e) => {
       const openBtn = e.target.closest("[data-open]");
       const quickBtn = e.target.closest("[data-quick]");
-      if (openBtn) {
-        await openLecture(openBtn.dataset.open);
-      } else if (quickBtn) {
+      if (openBtn) await openLecture(openBtn.dataset.open);
+      if (quickBtn) {
         const lecture = lectureById(quickBtn.dataset.quick);
-        if (!lecture) return;
-        if (lecturePurchased(lecture.id)) await openLecture(lecture.id);
-        else {
-          els.searchInput.value = lecture.title || "";
-          renderLectureCards();
-          await openLecture(lecture.id);
-        }
+        if (lecture) await openLecture(lecture.id);
       }
     });
 
@@ -1339,43 +981,29 @@
       if (delBtn) await deleteComment(delBtn.dataset.commentDel);
     });
 
-    els.buyLectureBtn?.addEventListener("click", buyCurrentLecture);
-
     els.saveSettingsBtn.addEventListener("click", updateSettings);
+    window.addEventListener("click", (e) => { if (e.target === els.lectureModal) closeModal(els.lectureModal); if (e.target === els.settingsModal) closeModal(els.settingsModal); if (e.target === els.gateModal) closeModal(els.gateModal); });
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeModal(els.lectureModal); closeModal(els.settingsModal); } });
+    window.addEventListener("beforeunload", () => { if (state.user) setOnline(false).catch(()=>{}); });
 
-    window.addEventListener("click", (e) => {
-      if (e.target === els.lectureModal) closeModal(els.lectureModal);
-      if (e.target === els.settingsModal) closeModal(els.settingsModal);
-      if (e.target === els.gateModal) closeModal(els.gateModal);
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeModal(els.lectureModal);
-        closeModal(els.settingsModal);
-      }
-    });
-
-    // Auth boot
     onAuthStateChanged(auth, async (user) => {
-      state.loading = true;
       els.loadBar.style.width = "20%";
       if (!user) {
         els.gateModal.classList.add("show");
-        state.loading = false;
         return;
       }
       state.user = user;
       state.profile = await loadProfile(user);
-      state.admin = isAdmin();
-      if (state.profile.banned) {
+      if (String(user.email || "").toLowerCase() === ADMIN_EMAIL) els.adminArea.classList.remove("hidden");
+      else els.adminArea.classList.add("hidden");
+      if (state.profile?.banned) {
         setMsg("هذا الحساب محظور. تواصل مع الدعم.", "error");
         await signOut(auth);
         els.gateModal.classList.add("show");
         return;
       }
       els.gateModal.classList.remove("show");
-      await setOnline(true).catch(() => {});
+      await setOnline(true).catch(()=>{});
       await loadLectures();
       await loadPurchases();
       await loadActivity();
@@ -1383,20 +1011,10 @@
       renderPurchases();
       renderActivity();
       syncHeader();
-      if (state.admin) {
-        els.adminArea.classList.remove("hidden");
-        await loadAdminStats();
-      } else {
-        els.adminArea.classList.add("hidden");
-      }
-      state.loading = false;
+      if (isAdmin()) await loadAdminStats();
       els.loadBar.style.width = "100%";
-      setTimeout(() => { els.loadBar.style.width = "0%"; }, 500);
+      setTimeout(() => els.loadBar.style.width = "0%", 350);
       setMsg("تم تحميل الحساب بنجاح.", "ok");
-    });
-
-    window.addEventListener("beforeunload", () => {
-      if (state.user) setOnline(false).catch(() => {});
     });
   </script>
 </body>
